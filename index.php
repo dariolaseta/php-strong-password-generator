@@ -7,7 +7,7 @@ function generatePassword($length, $characters){
     $password = array();
     $availableCharacters = strlen($characters);
     
-    if(empty($length)){
+    if(empty($length) || !is_numeric($length)){
         return false;
     }else{
         for($i = 0; $i < $length; $i++){
@@ -16,11 +16,11 @@ function generatePassword($length, $characters){
             array_push($password, $characters[$randomNumber]);
         }
 
-        var_dump($password);
+        return implode($password);
     }
 }
 
-generatePassword($passwordLength, $charactersList);
+$generatedPassword = generatePassword($passwordLength, $charactersList);
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +42,12 @@ generatePassword($passwordLength, $charactersList);
                     <input type="number" name="character-length" id="character-length" placeholder="Inserisci un numero..." class="ms-5">
                     <button type="submit" class="btn btn-primary mx-5">Invia</button>
                 </form>
+
+                <p class="text-center pb-5 pt-5">
+                    <?php 
+                        echo "La password generata è: " . $generatedPassword;
+                    ?>
+                </p>
             </div>
         </div>
     </body>
