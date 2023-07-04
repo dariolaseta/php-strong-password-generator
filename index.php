@@ -1,8 +1,26 @@
 <?php 
 $passwordLength = $_GET["character-length"];
+$charactersList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()[]";
+//echo $passwordLength;
 
-echo $passwordLength;
+function generatePassword($length, $characters){
+    $password = array();
+    $availableCharacters = strlen($characters);
+    
+    if(empty($length)){
+        return false;
+    }else{
+        for($i = 0; $i < $length; $i++){
+            $randomNumber = rand(0, $availableCharacters);
+            
+            array_push($password, $characters[$randomNumber]);
+        }
 
+        var_dump($password);
+    }
+}
+
+generatePassword($passwordLength, $charactersList);
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +39,7 @@ echo $passwordLength;
             <div class="bg-light">
                 <form action="./index.php" method="get" class="mt-5 px-5 py-5">
                     <label for="character-length">Lunghezza password:</label>
-                    <input type="number" name="character-length" id="character-length" placeholder="inserisci un numero..." class="ms-5">
+                    <input type="number" name="character-length" id="character-length" placeholder="Inserisci un numero..." class="ms-5">
                     <button type="submit" class="btn btn-primary mx-5">Invia</button>
                 </form>
             </div>
